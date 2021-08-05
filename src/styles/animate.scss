@@ -1,0 +1,68 @@
+@mixin box-text-shadow {
+  box-shadow: 0 1px 4px $component-shadow-color;
+  transform: scale(0.95);
+
+  .text {
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  }
+}
+
+@mixin border-animation {
+  &::before,
+  &::after {
+    position: absolute;
+    content: '';
+    border: 2px solid transparent;
+    width: 0;
+    height: 0;
+  }
+
+  &::after {
+    bottom: 0;
+    right: 0;
+  }
+
+  &::before {
+    top: 0;
+    left: 0;
+  }
+
+  &:hover::before,
+  &:hover::after {
+    width: 100%;
+    height: 100%;
+  }
+
+  &:hover::before {
+    border-top-color: $blue-hover;
+    border-right-color: $blue-hover;
+    transition: width 0.3s ease-out, height 0.3s ease-out 0.3s;
+  }
+
+  &:hover::after {
+    border-bottom-color: $blue-hover;
+    border-left-color: $blue-hover;
+    transition: border-color 0s ease-out 0.6s, width 0.3s ease-out 0.6s,
+      height 0.3s ease-out 1s;
+  }
+}
+
+@mixin show-border {
+  &:hover {
+    @include box-text-shadow;
+  }
+
+  @include border-animation;
+}
+
+@mixin show-image-scale {
+  & img {
+    overflow: hidden;
+    display: inline-block;
+    transition: all 0.5s;
+  }
+
+  &:hover img {
+    transform: scale(1.25);
+  }
+}

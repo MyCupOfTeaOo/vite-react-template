@@ -1,0 +1,22 @@
+@mixin line-camp($line: 2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+}
+
+@mixin font-family($family: none) {
+  @if $family != none {
+    font-family: $family, Microsoft YaHei, -apple-system, BlinkMacSystemFont,
+      Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+      Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  } @else {
+    font-family: Microsoft YaHei, -apple-system, BlinkMacSystemFont, Segoe UI,
+      Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
+      Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  }
+}
+@function hexToRGBString($hexColor) {
+  @return '#{red($hexColor)},#{green($hexColor)},#{blue($hexColor)}';
+}

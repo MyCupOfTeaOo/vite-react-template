@@ -1,0 +1,301 @@
+@import 'src/styles/theme.scss';
+
+.tea-spin-square {
+  position: relative;
+  width: 2em;
+  height: 2em;
+  border: 3px solid #3cefff;
+  overflow: hidden;
+  animation: spin 3s ease infinite;
+  @keyframes spin {
+    50%,
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes fill {
+    25%,
+    50% {
+      transform: scaleY(0);
+    }
+    100% {
+      transform: scaleY(1);
+    }
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    width: 2em;
+    height: 2em;
+    background-color: hsla(185, 100%, 62%, 0.75);
+    transform-origin: center bottom;
+    transform: scaleY(1);
+    animation: fill 3s linear infinite;
+  }
+}
+
+.tea-spin-treblingCircle {
+  position: relative;
+  font-size: 19px !important;
+  @mixin loader {
+    border: 3px solid transparent;
+    border-top-color: rgba($color: $primary-color, $alpha: 0.75);
+    border-right-color: rgba($color: $primary-color, $alpha: 0.75);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+
+  .outer {
+    width: 3.5em;
+    height: 3.5em;
+    margin-left: -1.75em;
+    margin-top: -1.75em;
+    animation: spin 2s linear infinite;
+    @include loader;
+  }
+
+  .middle {
+    width: 2.1em;
+    height: 2.1em;
+    margin-left: -1.05em;
+    margin-top: -1.05em;
+    animation: spin 1.75s linear reverse infinite;
+    @include loader;
+  }
+
+  .inner {
+    width: 0.8em;
+    height: 0.8em;
+    margin-left: -0.4em;
+    margin-top: -0.4em;
+    animation: spin 1.5s linear infinite;
+    @include loader;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+.tea-spin-spinStretch {
+  width: 2.5em;
+  height: 3em;
+  border: 3px solid transparent;
+  border-top-color: $primary-10;
+  border-bottom-color: $primary-10;
+  border-radius: 50%;
+  animation: spin-stretch 2s ease infinite;
+}
+
+@keyframes spin-stretch {
+  50% {
+    transform: rotate(360deg) scale(0.4, 0.33);
+    border-width: 8px;
+  }
+  100% {
+    transform: rotate(720deg) scale(1, 1);
+    border-width: 3px;
+  }
+}
+
+.tea-spin-dots {
+  width: 3em;
+  height: 3em;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  align-items: center;
+}
+
+.tea-spin-dots > div {
+  width: 0.5em;
+  height: 0.5em;
+  background-color: $primary-10;
+  border-radius: 50%;
+  animation: fade 1.5s alternate ease-in-out infinite;
+}
+
+.tea-spin-dots > div:nth-of-type(2),
+.tea-spin-dots > div:nth-of-type(4) {
+  animation-delay: 0.25s;
+}
+
+.tea-spin-dots > div:nth-of-type(3),
+.tea-spin-dots > div:nth-of-type(5),
+.tea-spin-dots > div:nth-of-type(7) {
+  animation-delay: 0.5s;
+}
+
+.tea-spin-dots > div:nth-of-type(6),
+.tea-spin-dots > div:nth-of-type(8) {
+  animation-delay: 0.75s;
+}
+
+.tea-spin-dots > div:nth-of-type(9) {
+  animation-delay: 1s;
+}
+
+@keyframes fade {
+  to {
+    opacity: 0.2;
+  }
+}
+
+.tea-spin-circle {
+  width: 3.75em;
+  transform-origin: center;
+  animation: rotate 2s linear infinite;
+  circle {
+    fill: none;
+    stroke: $primary-color;
+    stroke-width: 2;
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    animation: dash 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dashoffset: -125px;
+  }
+}
+
+.tea-progress-mask {
+  display: flex;
+  align-items: center;
+}
+$line-height: 28px;
+
+.tea-progress-layout {
+  --percent: 0;
+  position: relative;
+  max-width: 400px;
+  flex: auto;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  background-color: $component-background;
+  padding: $padding 0;
+  box-shadow: 0 4px 16px -1px rgba(18, 22, 33, 0.05);
+  overflow: hidden;
+  transition: all 0.4s;
+  &:not(.tea-progress-open) {
+    .tea-progress-title {
+      padding-bottom: 0;
+    }
+  }
+  & > * {
+    z-index: 1;
+  }
+  $progress-transition: background 0.6s ease, transform 0.16s linear;
+  .tea-progress-back {
+    z-index: 0;
+    background: #f5f9ff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    transform-origin: 0 50%;
+    overflow: hidden;
+    transition: $progress-transition;
+  }
+  .tea-progress-title {
+    padding: 0 $padding;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .tea-progress-avg-percent {
+    margin-top: $tiny-padding;
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .tea-progress-success {
+    float: right;
+    transform: translate(12px, 4px);
+  }
+  .tea-progress-fold {
+    display: block;
+    float: right;
+    transform: translate(20px, -8px) rotate(45deg);
+  }
+  .tea-progress-progress-item {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 0 $padding;
+    overflow: hidden;
+    margin-bottom: $small-padding;
+  }
+  .tea-progress-progress-header {
+    display: flex;
+    .tea-progress-progress-fileName {
+      font-weight: 500;
+      font-size: 18px;
+      flex: 1 1 auto;
+      display: inline-block;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      align-items: center;
+      display: block;
+      line-height: $line-height;
+      padding-right: $padding;
+    }
+    .tea-progress-progress-percent {
+      display: block;
+      flex: 0 0 auto;
+      line-height: $line-height;
+    }
+  }
+
+  .tea-progress-progress-progress {
+    margin-top: $small-padding;
+    height: 2px;
+    width: 100%;
+    background-color: #cdd9ed;
+    .fill {
+      height: 2px;
+      width: 100%;
+      background-color: #5628ee;
+      transform-origin: 0 50%;
+      transition: $progress-transition;
+    }
+  }
+}
+
+.tea-filerender {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tea-filerender-info {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}

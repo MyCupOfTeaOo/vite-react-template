@@ -1,0 +1,97 @@
+$primary-color: #1ab394;
+$text-color: rgb(25, 31, 37);
+@import 'colors.scss';
+@import 'animate.scss';
+@import 'utils.scss';
+
+$layout-width: 1200px;
+
+$vc-layout-width: 1200px;
+
+$top-search-width: 300px;
+
+$header-height: 104px;
+
+$footer-height: 150px;
+
+$friendship-link-height: 154px;
+
+$nav-height: 49px;
+
+// Media queries breakpoints
+// Extra small screen / phone
+$screen-xs: 480px;
+$screen-xs-min: $screen-xs;
+
+// Small screen / tablet
+$screen-sm: 576px;
+$screen-sm-min: $screen-sm;
+
+// Medium screen / desktop
+$screen-md: 768px;
+$screen-md-min: $screen-md;
+
+// Large screen / wide desktop
+$screen-lg: 992px;
+$screen-lg-min: $screen-lg;
+
+// Extra large screen / full hd
+$screen-xl: 1200px;
+$screen-xl-min: $screen-xl;
+
+// Extra extra large screen / large desktop
+$screen-xxl: 1600px;
+$screen-xxl-min: $screen-xxl;
+
+// provide a maximum
+$screen-xs-max: ($screen-sm-min - 1px);
+$screen-sm-max: ($screen-md-min - 1px);
+$screen-md-max: ($screen-lg-min - 1px);
+$screen-lg-max: ($screen-xl-min - 1px);
+$screen-xl-max: ($screen-xxl-min - 1px);
+
+$component-background: #fff;
+$component-gray-background: #f0f2f5;
+$component-shadow-color: rgba(0, 0, 0, 0.15);
+$component-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+$component-radius-per: 8%;
+$component-radius: 8px;
+$border-color-split: #d6d8dc;
+$padding: 24px;
+$small-padding: 12px;
+$tiny-padding: 6px;
+$large-padding: 48px;
+$big-padding: 120px;
+
+$danger: $red-7;
+$warning: rgb(255, 102, 0);
+$success: $primary-5;
+
+$table-padding: 2px;
+$blue: #3659bf;
+$blue-hover: #3366cc;
+
+@mixin cursor {
+  cursor: pointer;
+
+  &:hover {
+    cursor: pointer;
+    color: $primary-5;
+  }
+}
+
+@mixin clearfix {
+  &::after {
+    content: ' ';
+    display: block;
+    clear: both;
+    overflow: hidden;
+    visibility: hidden;
+  }
+}
+
+@mixin ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

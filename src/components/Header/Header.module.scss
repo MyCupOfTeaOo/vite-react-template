@@ -1,0 +1,108 @@
+@import 'src/styles/theme.scss';
+
+:global(.ant-layout-header) {
+  &.header {
+    padding: 0 0 0 18px;
+    background: #fff;
+    position: sticky;
+    transition: all 0.5s;
+    top: 0;
+    z-index: 99;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  }
+}
+
+.logo {
+  display: flex;
+  color: rgba($color: $text-color, $alpha: 0.74);
+  align-items: center;
+  height: 100%;
+  img {
+    height: 34px;
+    margin-right: 8px;
+  }
+  h1 {
+    text-align: center;
+    line-height: 1.2;
+    white-space: pre;
+    font-weight: 700;
+    margin: 0 0 0 $tiny-padding;
+    color: #666;
+    font-size: 18px;
+  }
+}
+
+.icon {
+  line-height: 1;
+  height: 100%;
+  margin: 0 $small-padding;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  transition: all 0.2s;
+  cursor: pointer;
+  &:hover {
+    color: $primary-5;
+  }
+  & > span {
+    &:first-child {
+      font-size: 20px;
+    }
+  }
+}
+
+.menu {
+  flex: 1 1 auto;
+  margin: 0 $padding;
+  overflow: hidden;
+  line-height: 62px;
+  :global {
+    .ant-menu-item {
+      padding-right: $small-padding !important;
+      padding-left: $small-padding !important;
+    }
+  }
+}
+
+.rightMenu {
+  flex: 0 0 140px;
+  padding-right: $padding;
+  overflow: hidden;
+  display: block;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  flex: 0 0 auto;
+  margin-right: $small-padding;
+}
+
+.name {
+  flex: 1 1 auto;
+  color: #726f6f;
+}
+
+.dropmenu {
+  :global {
+    .ant-dropdown-menu-item {
+      padding-top: 8px;
+      padding-bottom: 8px;
+      display: flex;
+      align-items: center;
+      .ant-dropdown-menu-item-icon {
+        font-size: 18px;
+      }
+    }
+  }
+}
+.role {
+  flex: 0 0 auto;
+  margin-right: $padding;
+}

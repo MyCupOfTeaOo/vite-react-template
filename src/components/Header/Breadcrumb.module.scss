@@ -1,0 +1,7 @@
+@import 'src/styles/theme.scss';
+.breadcrumb {
+  flex: 0 0 auto;
+  transition: all 0.5s;
+  padding: $tiny-padding $small-padding;
+  background-color: $component-background;
+}
