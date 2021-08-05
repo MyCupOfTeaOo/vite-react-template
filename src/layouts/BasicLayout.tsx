@@ -19,7 +19,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
   return (
     <Layout className={styles.normal}>
       <Header logo={logo} title={projectName} />
-      <Layout id="layout">
+      <Layout id="layout" className={styles.layout}>
         <Sider
           className={styles.sider}
           collapsedWidth={48}

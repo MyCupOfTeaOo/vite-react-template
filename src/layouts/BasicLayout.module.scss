@@ -1,5 +1,9 @@
 @import 'src/styles/theme.scss';
 
+.layout {
+  flex-direction: row;
+}
+
 .sign {
   min-height: 100vh;
   display: flex;
