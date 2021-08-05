@@ -2,7 +2,7 @@ import { ValidateErrorEntity } from 'rc-field-form/es/interface';
 
 import { mutate, cache } from 'swr';
 import React from 'react';
-import { bucket, endpoint } from '#/projectConfig';
+import { BUCKET, endpoint } from '#/projectConfig';
 import { injectProps } from './decorators';
 
 export enum ChineseNum {
@@ -200,7 +200,7 @@ export function getPreviewUrl(
   if (uid?.startsWith('http')) {
     return uid;
   }
-  return uid ? `https://${bucket}.${endpoint}/${uid}` : placeholder;
+  return uid ? `https://${BUCKET}.${endpoint}/${uid}` : placeholder;
 }
 
 export const isInboundLink = /\S*:\/\/\S*/i;

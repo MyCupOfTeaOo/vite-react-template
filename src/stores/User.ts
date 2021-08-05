@@ -1,5 +1,6 @@
 import { User as UserModel } from '@/models/User';
 import { makeAutoObservable } from 'mobx';
+import * as Sentry from '@sentry/browser';
 import { RootStore } from '.';
 
 export default class User {
@@ -14,6 +15,9 @@ export default class User {
 
   setUser(user?: UserModel) {
     this.user = user;
+    if (user) {
+      Sentry.setUser(user);
+    }
   }
 
   clearUser() {

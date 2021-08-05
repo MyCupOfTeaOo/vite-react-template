@@ -8,6 +8,7 @@ import axios, {
   AxiosInterceptorManager,
   AxiosResponse,
 } from 'axios';
+import * as Sentry from '@sentry/browser';
 import { apiPrefix } from '#/projectConfig';
 import { clearToken, getToken } from './authority';
 import { getRedirectUrl } from './utils';
@@ -89,7 +90,9 @@ const errorHandler = async (error: {
       (typeof response.data === 'string' && response.data) ||
       codeMessage[response.status] ||
       response.statusText;
-    console.error('请求异常', error.config.url, errortext);
+    Sentry.setContext('request', error.config);
+    Sentry.setContext('response', response);
+    Sentry.captureException(errortext);
     return {
       response,
       code: response.status,

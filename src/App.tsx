@@ -13,9 +13,24 @@ import { ConfigProvider, Modal } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
 import './index.scss';
 import './styles/antd.less';
+import * as Sentry from '@sentry/browser';
+import { Integrations } from '@sentry/tracing';
 import Title from './components/Title';
 import routes from '#/routes';
 import renderRoute from './components/renderRoute';
+import Boundary from './components/Boundary';
+import { DSN } from '#/projectConfig';
+
+if (DSN) {
+  Sentry.init({
+    dsn: DSN,
+    integrations: [new Integrations.BrowserTracing()],
+
+    // We recommend adjusting this value in production, or using tracesSampler
+    // for finer control
+    tracesSampleRate: 1.0,
+  });
+}
 
 dayjs.locale('zh-cn'); // 使用本地化语言
 dayjs.extend(relativeTime);
@@ -99,25 +114,27 @@ const swrConfig: SWRConfiguration<any, any, Fetcher<any>> = {
 
 function App() {
   return (
-    <Router>
-      <ConfigProvider locale={zhCN}>
-        <SWRConfig value={swrConfig}>
-          <HelmetProvider>
-            <Title />
-            <Suspense fallback={<LazyLoad />}>
-              <Switch>
-                {routes.map((item) => {
-                  return renderRoute(item);
-                })}
-                <Route>
-                  <ErrorPage statusCode={404} />
-                </Route>
-              </Switch>
-            </Suspense>
-          </HelmetProvider>
-        </SWRConfig>
-      </ConfigProvider>
-    </Router>
+    <Boundary>
+      <Router>
+        <ConfigProvider locale={zhCN}>
+          <SWRConfig value={swrConfig}>
+            <HelmetProvider>
+              <Title />
+              <Suspense fallback={<LazyLoad />}>
+                <Switch>
+                  {routes.map((item) => {
+                    return renderRoute(item);
+                  })}
+                  <Route>
+                    <ErrorPage statusCode={404} />
+                  </Route>
+                </Switch>
+              </Suspense>
+            </HelmetProvider>
+          </SWRConfig>
+        </ConfigProvider>
+      </Router>
+    </Boundary>
   );
 }
 

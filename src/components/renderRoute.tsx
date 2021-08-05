@@ -3,6 +3,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { RouteInterface } from '#/routes';
 import Title from './Title';
 import ErrorPage from './ErrorPage';
+import Boundary from './Boundary';
 
 const renderRoute = (route: RouteInterface) => {
   const Com = route.component || React.Fragment;
@@ -14,22 +15,24 @@ const renderRoute = (route: RouteInterface) => {
     );
   }
   const renderCom = (
-    <Com>
-      <Title />
-      {route.routes ? (
-        <Switch>
-          {route.routes.map((subRoute) => {
-            return renderRoute(subRoute);
-          })}
-          <Route path={route.path} exact>
-            <Redirect to={route.routes[0].path} />
-          </Route>
-          <Route>
-            <ErrorPage statusCode={404} />
-          </Route>
-        </Switch>
-      ) : undefined}
-    </Com>
+    <Boundary>
+      <Com>
+        <Title />
+        {route.routes ? (
+          <Switch>
+            {route.routes.map((subRoute) => {
+              return renderRoute(subRoute);
+            })}
+            <Route path={route.path} exact>
+              <Redirect to={route.routes[0].path} />
+            </Route>
+            <Route>
+              <ErrorPage statusCode={404} />
+            </Route>
+          </Switch>
+        ) : undefined}
+      </Com>
+    </Boundary>
   );
   return (
     <Route
