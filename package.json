@@ -42,7 +42,7 @@
     "react-router-dom": "^5.2.0",
     "react-use": "^17.2.4",
     "swr": "^0.5.6",
-    "teaness": "^5.0.1"
+    "teaness": "^5.0.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",

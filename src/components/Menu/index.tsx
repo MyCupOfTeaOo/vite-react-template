@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, memo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu as AMenu } from 'antd';
 import { MenuProps as AntMenuProps } from 'antd/lib/menu/index';
@@ -202,4 +202,4 @@ const Menu: React.FC<MenuProps> = ({ routes, collapsed, ...rest }) => {
   );
 };
 
-export default Menu;
+export default memo(Menu);

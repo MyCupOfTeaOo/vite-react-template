@@ -5,8 +5,8 @@ import { ComponentType } from 'react';
 export interface RouteInterface {
   title?: string;
   path: string;
+  menuId?: string;
   hidden?: boolean;
-  hiddenSubMenu?: boolean;
   component?: ComponentType<any>;
   Routes?: ComponentType<any>[];
   exact?: boolean;
@@ -53,6 +53,5 @@ const routes: RouteInterface[] = [
     exact: false,
   },
 ];
-
 
 export default routes;

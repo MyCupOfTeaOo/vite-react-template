@@ -8,15 +8,14 @@ import MyBreadcrumb from '@/components/Header/MyBreadcrumb';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import store from '@/stores';
 import LazyLoad from '@/components/LazyLoad';
-import styles from './BasicLayout.module.scss';
 import { projectName } from '#/projectConfig';
+import styles from './BasicLayout.module.scss';
 
 const { Sider, Content } = Layout;
 
 export interface BasicLayoutProps {}
 
 const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
-  // @TODO 加载菜单
   return (
     <Layout className={styles.normal}>
       <Header logo={logo} title={projectName} />

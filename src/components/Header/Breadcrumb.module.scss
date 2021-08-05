@@ -2,6 +2,6 @@
 .breadcrumb {
   flex: 0 0 auto;
   transition: all 0.5s;
-  padding: $tiny-padding $small-padding;
+  padding: $tiny-padding $small-padding !important;
   background-color: $component-background;
 }

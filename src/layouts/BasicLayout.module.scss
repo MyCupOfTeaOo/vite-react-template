@@ -79,3 +79,8 @@
     overflow: hidden;
   }
 }
+
+.content {
+  overflow: auto;
+  flex-direction: column;
+}

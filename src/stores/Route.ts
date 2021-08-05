@@ -1,6 +1,8 @@
 import { makeAutoObservable } from 'mobx';
+import { MenuId2Route } from '@/models/Menu';
 import routes, {
   loginRoutes as afterLoginRoutes,
+  menuRoutes,
   RouteInterface,
 } from '#/routes';
 import { RootStore } from '.';
@@ -23,7 +25,9 @@ export function getUrlMap(
 export default class Route {
   rootStore: RootStore;
 
-  menuRoutes: RouteInterface[] = [];
+  menuRoutes: RouteInterface[] = menuRoutes;
+
+  menu2Route: MenuId2Route = {};
 
   urlMap: { [key: string]: RouteInterface } = Object.assign(
     getUrlMap({}, routes),
@@ -35,16 +39,21 @@ export default class Route {
     makeAutoObservable(this);
   }
 
-  setMenuRoutes(menuRoutes: RouteInterface[]) {
-    this.menuRoutes = menuRoutes;
-    this.urlMap = Object.assign(this.urlMap, getUrlMap({}, menuRoutes));
+  setMenuRoutes(newMenuRoutes: RouteInterface[]) {
+    this.menuRoutes = [...menuRoutes, ...newMenuRoutes];
+    this.urlMap = Object.assign(this.urlMap, getUrlMap({}, newMenuRoutes));
   }
 
-  clearMenuRoutes() {
-    this.menuRoutes = [];
+  setMenu2Route(menu2Route: MenuId2Route) {
+    this.menu2Route = menu2Route;
+  }
+
+  clear() {
+    this.menuRoutes = menuRoutes;
     this.urlMap = Object.assign(
       getUrlMap({}, routes),
       getUrlMap({}, afterLoginRoutes),
     );
+    this.menu2Route = {};
   }
 }

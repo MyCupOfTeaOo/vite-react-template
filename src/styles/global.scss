@@ -72,6 +72,13 @@ body,
     Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   height: 100%;
   background: $component-gray-background;
+  .ant-layout-sider-children {
+    background: #fff;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+  }
   iframe {
     border: none;
   }

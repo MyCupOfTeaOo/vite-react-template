@@ -1,0 +1,29 @@
+@import 'src/styles/theme.scss';
+
+.normal {
+  flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  overflow-x: hidden;
+  background: $component-background;
+}
+
+.side {
+  flex: 0 0 400px;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.search {
+  flex: 0 0 auto;
+}
+
+.tree {
+  flex: 1 1 auto;
+  overflow-x: hidden;
+}
+
+.content {
+  flex: 1 1 auto;
+}

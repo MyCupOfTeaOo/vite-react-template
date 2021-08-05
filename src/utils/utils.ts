@@ -1,7 +1,9 @@
 import { ValidateErrorEntity } from 'rc-field-form/es/interface';
 
 import { mutate, cache } from 'swr';
+import React from 'react';
 import { bucket, endpoint } from '#/projectConfig';
+import { injectProps } from './decorators';
 
 export enum ChineseNum {
   零,
@@ -210,4 +212,33 @@ export function getRedirectUrl(current_url?: string) {
   return `${path}${
     redirect !== '/' ? `?redirect=${encodeURIComponent(redirect)}` : ''
   }`;
+}
+
+export function safeParse(
+  str: any,
+  callback?: (err: any) => void,
+): { [key: string]: any } | undefined {
+  try {
+    if (!str) {
+      return undefined;
+    }
+    return JSON.parse(str);
+  } catch (error) {
+    if (callback) callback(error);
+    console.error(error, str);
+  }
+  return undefined;
+}
+
+export function dynamicImportBlock(blockName: string, args?: any) {
+  return React.lazy(() =>
+    import(/* @vite-ignore */ `../blocks/${blockName}.tsx`).then((block) => {
+      if (!args) {
+        return block;
+      }
+      return {
+        default: injectProps(safeParse(args))(block.default),
+      };
+    }),
+  );
 }
