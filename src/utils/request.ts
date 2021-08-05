@@ -50,14 +50,23 @@ export const codeMessage: { [n: number]: string } = {
  * 异常处理程序
  */
 
-export interface ReqResponse<T = unknown> {
-  msg: string;
-  code: number;
-  response: AxiosResponse;
-  isSuccess?: boolean;
-  isCancel?: boolean;
-  data?: T;
-}
+export type ReqResponse<T = unknown> =
+  | {
+      msg: string;
+      code: number;
+      response: AxiosResponse;
+      isSuccess?: false;
+      isCancel?: boolean;
+      data?: T;
+    }
+  | {
+      msg: string;
+      code: number;
+      response: AxiosResponse;
+      isSuccess: true;
+      isCancel?: boolean;
+      data: T;
+    };
 
 export type CancellablePromise<T> = Promise<T> & {
   cancel: (str?: string) => void;
@@ -168,10 +177,10 @@ request.interceptors.response.use((response) => {
   };
 }, errorHandler);
 
-export function download<T = any>(
+export function download(
   response: AxiosResponse,
   filename?: string,
-): ReqResponse<T> {
+): ReqResponse<undefined> {
   const disposition = (response.headers as any)['content-disposition'];
   if (disposition) {
     const sourceFilename =
@@ -187,6 +196,7 @@ export function download<T = any>(
       return {
         msg: '下载成功',
         code: RespCode.success,
+        data: undefined,
         isSuccess: true,
         response,
       };

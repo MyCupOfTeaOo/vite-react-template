@@ -1,9 +1,8 @@
 import React from 'react';
-import { Dropdown, Layout, Menu, notification } from 'antd';
+import { Dropdown, Layout, Menu, notification, Avatar } from 'antd';
 import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { clearToken } from '@/utils/authority';
-import Avatar from 'antd/lib/avatar/avatar';
 import classNames from 'classnames';
 import avatar from '@/assets/avatar.png';
 import { observer } from 'mobx-react-lite';
@@ -29,12 +28,18 @@ const Header: React.FC<HeaderProps> = ({ logo, title }) => {
   const menu = (
     <Menu className={styles.dropmenu}>
       <Menu.Item
+        key="info"
         icon={<UserOutlined />}
         onClick={() => {
           notification.info({
             message: store.user.user?.realName,
             description: (
-              <pre>
+              <pre
+                style={{
+                  overflow: 'hidden',
+                  whiteSpace: 'pre-wrap',
+                }}
+              >
                 {`账户：${store.user.user?.userAccount}
 角色：${store.user.user?.roleValue}
 最后登陆ip: ${store.user.user?.lastIp}
@@ -46,7 +51,12 @@ const Header: React.FC<HeaderProps> = ({ logo, title }) => {
       >
         用户信息
       </Menu.Item>
-      <Menu.Item danger icon={<LogoutOutlined />} onClick={onLogout}>
+      <Menu.Item
+        key="logout"
+        danger
+        icon={<LogoutOutlined />}
+        onClick={onLogout}
+      >
         退出登录
       </Menu.Item>
     </Menu>

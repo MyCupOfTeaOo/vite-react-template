@@ -36,13 +36,13 @@
     "nprogress": "^0.2.0",
     "numeral": "^2.0.6",
     "qs": "^6.10.1",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-helmet-async": "^1.0.9",
     "react-router-dom": "^5.2.0",
     "react-use": "^17.2.4",
     "swr": "^0.5.6",
-    "teaness": "^5.0.0"
+    "teaness": "^5.0.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",

@@ -42,6 +42,13 @@
   flex: 1 1 auto;
   flex-direction: column;
   text-align: center;
+  position: relative;
+}
+
+.rightAction {
+  position: absolute;
+  top: 32px;
+  right: 24px;
 }
 
 .loginTitle {
@@ -125,6 +132,9 @@ $item-with: 210px;
 .itemLogo {
   width: 22px;
   margin-right: 18px;
+  img {
+    width: 100%;
+  }
 }
 
 .content {
@@ -135,11 +145,41 @@ $item-with: 210px;
   justify-content: center;
 }
 
-.token {
-  width: $item-with;
-}
-
 .wechat {
   width: 300px;
 }
 
+.loginCover {
+  max-width: 100%;
+}
+
+.passwordLogin {
+  width: 320px;
+}
+
+.prefixIcon {
+  margin-left: -4px;
+  font-size: 18px;
+  color: rgba($color: $text-color, $alpha: 0.2);
+}
+$item-h: 40px;
+
+.keyBoard {
+  @extend .prefixIcon;
+  svg {
+    width: 20px;
+    height: 12px;
+  }
+}
+
+.captcha {
+  height: $item-h;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.captchaButton {
+  padding: 0 !important;
+}
