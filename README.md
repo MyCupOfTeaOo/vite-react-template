@@ -18,10 +18,15 @@ vite + react + typeScript
 
 `npm run test`
 
+## mock
+
+`npm i -g umi-serve cross-env`
+`cross-env PORT=5000 umi-serve`
+
 ## TODO
 
 - [ ] 支持 block 安装
-- [ ] 支持 mock
+- [x] 支持 mock
 
 ## 目录结构
 

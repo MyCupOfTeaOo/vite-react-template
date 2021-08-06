@@ -6,3 +6,4 @@
 **/translations
 **/*.js
 scripts
+/mock
