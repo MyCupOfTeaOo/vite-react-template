@@ -1,0 +1,7 @@
+@import 'src/styles/theme.scss';
+
+.ant-form-item-has-error {
+  .editor {
+    border: 1px solid $danger !important;
+  }
+}

@@ -26,12 +26,17 @@ export function getFileInfoByUri(uri: string, cancelToken?: CancelToken) {
 }
 
 export function uploadFile(
-  file: File | UploadFile,
+  file: File | UploadFile | Blob,
   onUploadProgress?: (percent: number, progressEvent?: any) => void,
+  fileName?: string,
 ) {
   const source = Axios.CancelToken.source();
   const formData = new FormData();
-  formData.append('file', ((file as UploadFile).originFileObj || file) as File);
+  formData.append(
+    'file',
+    ((file as UploadFile).originFileObj || file) as File,
+    fileName,
+  );
   const r = request
     .post<
       ReqResponse<{

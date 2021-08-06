@@ -19,6 +19,7 @@
     "@material-ui/icons": "^4.11.2",
     "@sentry/browser": "^6.10.0",
     "@sentry/tracing": "^6.10.0",
+    "@tinymce/tinymce-react": "^3.12.6",
     "@types/classnames": "^2.3.1",
     "@types/crypto-js": "^4.0.2",
     "@types/echarts": "^4.9.9",
@@ -46,7 +47,8 @@
     "react-router-dom": "^5.2.0",
     "react-use": "^17.2.4",
     "swr": "^0.5.6",
-    "teaness": "^5.0.2"
+    "teaness": "^5.0.2",
+    "tinymce": "^5.8.2"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.14.5",
