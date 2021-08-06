@@ -41,7 +41,7 @@ export const loadRoleList = () => {
 };
 
 export function getOprs(menuId: string) {
-  return request.post(
+  return request.post<ReqResponse<string[]>>(
     `/permission/api/SysRole2menu/getOprs`,
     {},
     {

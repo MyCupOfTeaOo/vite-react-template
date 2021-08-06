@@ -1,0 +1,16 @@
+{
+  "name": "@qg-com/dict",
+  "version": "0.0.1",
+  "feature": "字典",
+  "description": "字典的选择与翻译",
+  "repository": {
+    "type": "git",
+    "url": "http://192.168.117.144/common/react-component-scaffold/tree/master/src/components/Dict"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@qg-util/request": "^0.0.1",
+    "antd": "^4.6.2",
+    "teaness": "^4.1.30"
+  }
+}
