@@ -1,6 +1,7 @@
 import { dynamicImportBlock, isInboundLink } from '@/utils/utils';
 import React from 'react';
 import NotImplementPage from '@/components/NotImplementPage';
+import { IconFont } from '@/components/IconFont';
 import { PageInterface } from '#/pages';
 import { RouteInterface } from '#/routes';
 
@@ -91,7 +92,13 @@ export function genRoutes(
           target?.hidden,
         component,
         exact: target?.exact ?? !isComponent,
-        // icon: menu.menuIcon,
+        // 后台会傻了吧唧返回'null'字符串
+        icon:
+          menu.menuIcon && menu.menuIcon !== 'null' ? (
+            <IconFont type={menu.menuIcon} />
+          ) : (
+            target?.icon
+          ),
         routes: subRoutes.length ? subRoutes : undefined,
       } as RouteInterface);
     } else {
@@ -111,7 +118,11 @@ export function genRoutes(
                 menu.isMenu === true
               ) || hiddenMenu,
             component,
-            // icon: menu.menuIcon,
+            // 后台会傻了吧唧返回'null'字符串
+            icon:
+              menu.menuIcon && menu.menuIcon !== 'null' ? (
+                <IconFont type={menu.menuIcon} />
+              ) : undefined,
             routes: subRoutes.length ? subRoutes : undefined,
           } as RouteInterface);
         } else {
@@ -126,7 +137,11 @@ export function genRoutes(
               ) || hiddenMenu,
             component: NotImplementPage,
             exact: true,
-            // icon: menu.menuIcon,
+            // 后台会傻了吧唧返回'null'字符串
+            icon:
+              menu.menuIcon && menu.menuIcon !== 'null' ? (
+                <IconFont type={menu.menuIcon} />
+              ) : undefined,
             routes: subRoutes.length ? subRoutes : undefined,
           } as RouteInterface);
         }
