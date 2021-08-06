@@ -16,11 +16,23 @@ import './styles/antd.less';
 import * as Sentry from '@sentry/browser';
 import { Integrations } from '@sentry/tracing';
 import commit from '@/.commit';
+import defaultLocale from 'antd/es/locale/default';
+import { BaseGrid, Upload } from 'teaness';
 import Title from './components/Title';
 import routes from '#/routes';
 import renderRoute from './components/renderRoute';
 import Boundary from './components/Boundary';
-import { DSN } from '#/projectConfig';
+import { apiPrefix, DSN } from '#/projectConfig';
+import { getFileInfo, uploadFile } from './service/file';
+import { getPreviewUrl, join } from './utils/utils';
+import PictureView from './components/PictureView';
+
+if (zhCN.Modal) {
+  zhCN.Modal.justOkText = '确定';
+}
+
+// fix show english
+Object.assign(defaultLocale, zhCN);
 
 if (DSN) {
   Sentry.init({
@@ -120,6 +132,78 @@ Modal.defaultProps = {
 
 const swrConfig: SWRConfiguration<any, any, Fetcher<any>> = {
   revalidateOnFocus: false,
+};
+
+/** MIME
+excel
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+application/vnd.ms-excel
+application/vnd.ms-excel.sheet.macroEnabled.12
+word
+application/vnd.openxmlformats-officedocument.wordprocessingml.document
+application/msword
+application/vnd.openxmlformats-officedocument.wordprocessingml.document
+ppt
+application/vnd.openxmlformats-officedocument.presentationml.presentation
+application/vnd.ms-powerpoint
+ */
+
+BaseGrid.defaultProps = {
+  ...BaseGrid.defaultProps,
+  headerHeight: 32,
+  rowHeight: 32,
+  noRowsOverlayComponentFramework: () => <span>暂无数据</span>,
+};
+
+export const SUPPORT_PREVIEW_FILES = new Set([
+  'xls',
+  'xlsx',
+  'xlsm',
+  'ppt',
+  'pptx',
+  'doc',
+  'docx',
+]);
+
+Upload.defaultProps = {
+  ...Upload.defaultProps,
+
+  onUpload: uploadFile,
+  onPreview: (file) => {
+    if (file.type && /image\/.*/.test(file.type)) {
+      if (file.originFileObj) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          PictureView({
+            src: e.target?.result as string,
+          });
+        };
+        reader.readAsDataURL(file.originFileObj);
+      } else {
+        PictureView({
+          src: file.thumbUrl || file.url,
+        });
+      }
+    } else if (file.originFileObj) {
+      Modal.error({
+        content: '暂未上传,上传后可查看',
+      });
+    } else if (file.type === 'application/pdf') {
+      window.open(getPreviewUrl(file.uid));
+    } else if (file.uid.indexOf('.xls') || file.uid.indexOf('.xlsx')) {
+      window.open(file.thumbUrl || file.url);
+    } else if (SUPPORT_PREVIEW_FILES.has(file.name.split('.').pop() || '')) {
+      window.open(
+        join(apiPrefix, `/file-online-preview/onlinePreview?url=${file.uid}`),
+      );
+    } else {
+      window.open(file.thumbUrl || file.url);
+    }
+  },
+  getFile: getFileInfo,
+  onDownload: (file) => {
+    window.open(file.thumbUrl || file.url);
+  },
 };
 
 function App() {

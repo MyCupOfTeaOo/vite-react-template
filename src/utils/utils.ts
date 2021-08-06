@@ -2,8 +2,8 @@ import { ValidateErrorEntity } from 'rc-field-form/es/interface';
 
 import { mutate, cache } from 'swr';
 import React from 'react';
-import { BUCKET, endpoint } from '#/projectConfig';
 import { injectProps } from './decorators';
+import { apiPrefix } from '#/projectConfig';
 
 export enum ChineseNum {
   零,
@@ -200,7 +200,14 @@ export function getPreviewUrl(
   if (uid?.startsWith('http')) {
     return uid;
   }
-  return uid ? `https://${BUCKET}.${endpoint}/${uid}` : placeholder;
+  return uid
+    ? join(
+        apiPrefix,
+        `/file-online-preview/pdfjs/web/viewer.html?file=${encodeURIComponent(
+          join(apiPrefix, `/file/previewFileByUri?uri=${uid}`),
+        )}`,
+      )
+    : placeholder;
 }
 
 export const isInboundLink = /\S*:\/\/\S*/i;
