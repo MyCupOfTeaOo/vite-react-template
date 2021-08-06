@@ -8,7 +8,7 @@ export function injectProps<T extends {}>(
   props?: Partial<T>,
   options?: InjectOptions,
 ) {
-  return function <P extends T, S extends {}>(
+  return function <P extends Partial<T>, S extends {}>(
     WrappedComponent: React.ComponentType<P>,
   ) {
     const Com = class Component extends React.PureComponent<P, S> {

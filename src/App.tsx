@@ -15,6 +15,7 @@ import './index.scss';
 import './styles/antd.less';
 import * as Sentry from '@sentry/browser';
 import { Integrations } from '@sentry/tracing';
+import commit from '@/.commit';
 import Title from './components/Title';
 import routes from '#/routes';
 import renderRoute from './components/renderRoute';
@@ -31,6 +32,15 @@ if (DSN) {
     tracesSampleRate: 1.0,
   });
 }
+
+// eslint-disable-next-line
+console.group('版本信息');
+// eslint-disable-next-line
+console.log(`版本hash: ${commit.hash}`);
+// eslint-disable-next-line
+console.log(`更新内容: ${commit.msg}`);
+// eslint-disable-next-line
+console.groupEnd();
 
 dayjs.locale('zh-cn'); // 使用本地化语言
 dayjs.extend(relativeTime);
