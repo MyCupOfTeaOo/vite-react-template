@@ -1,6 +1,14 @@
 import React, { useMemo } from 'react';
 import { Button, Badge, Input } from 'antd';
-import { Select, useForm, DataGrid, useStore, Col, horizontal } from 'teaness';
+import {
+  Select,
+  useForm,
+  DataGrid,
+  useStore,
+  Col,
+  horizontal,
+  FoldCard,
+} from 'teaness';
 import { FormConfigs } from 'teaness/es/Form/typings';
 import { ColumnDefs } from 'teaness/es/DataGrid/typings';
 import { enabledSelect } from '@/constant';
@@ -91,7 +99,7 @@ const CommonDict: React.FC<CommonDictProps> = () => {
   }, []);
   return (
     <div className="search-layout">
-      <div className="search-area">
+      <FoldCard title="筛选">
         <Form layout={horizontal}>
           <Item text="类型" required id="dictType">
             <Select
@@ -134,18 +142,10 @@ const CommonDict: React.FC<CommonDictProps> = () => {
               >
                 重置
               </Button>
-              {/* <Button
-                type="primary"
-                onClick={() => {
-                  setVisible(true);
-                }}
-              >
-                新增
-              </Button> */}
             </div>
           </Col>
         </Form>
-      </div>
+      </FoldCard>
       <DataGrid columnDefs={columnDefs} {...gridProps} />
     </div>
   );

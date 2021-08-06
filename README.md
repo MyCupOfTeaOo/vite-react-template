@@ -60,6 +60,8 @@ vite + react + typeScript
 
 ### DataGrid
 
+参考 [src/pages/DictCommon/index.tsx](./src/pages/DictCommon/index.tsx)
+
 ### 配置 pages
 
 详见 [config/pages.tsx](./config/pages.tsx)
