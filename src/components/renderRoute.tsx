@@ -4,6 +4,7 @@ import { RouteInterface } from '#/routes';
 import Title from './Title';
 import ErrorPage from './ErrorPage';
 import Boundary from './Boundary';
+import { AuthContext } from './Authority/context';
 
 const renderRoute = (route: RouteInterface) => {
   const Com = route.component || React.Fragment;
@@ -16,22 +17,28 @@ const renderRoute = (route: RouteInterface) => {
   }
   const renderCom = (
     <Boundary>
-      <Com {...route.params}>
-        <Title />
-        {route.routes ? (
-          <Switch>
-            {route.routes.map((subRoute) => {
-              return renderRoute(subRoute);
-            })}
-            <Route path={route.path} exact>
-              <Redirect to={route.routes[0].path} />
-            </Route>
-            <Route>
-              <ErrorPage statusCode={404} />
-            </Route>
-          </Switch>
-        ) : undefined}
-      </Com>
+      <AuthContext.Provider
+        value={{
+          menuId: route.menuId,
+        }}
+      >
+        <Com {...route.params}>
+          <Title />
+          {route.routes ? (
+            <Switch>
+              {route.routes.map((subRoute) => {
+                return renderRoute(subRoute);
+              })}
+              <Route path={route.path} exact>
+                <Redirect to={route.routes[0].path} />
+              </Route>
+              <Route>
+                <ErrorPage statusCode={404} />
+              </Route>
+            </Switch>
+          ) : undefined}
+        </Com>
+      </AuthContext.Provider>
     </Boundary>
   );
   return (
