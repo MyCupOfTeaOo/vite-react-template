@@ -1,4 +1,4 @@
-import { dynamicImportBlock, isInboundLink, safeParse } from '@/utils/utils';
+import { dynamicImportBlock, isInboundLink } from '@/utils/utils';
 import React from 'react';
 import NotImplementPage from '@/components/NotImplementPage';
 import { PageInterface } from '#/pages';
@@ -10,7 +10,6 @@ export interface Menu {
   menuId: string;
   menuName: string;
   menuUrl: string;
-  params?: string;
   isMenu?: boolean;
   menus?: Menu[];
 }
@@ -64,7 +63,6 @@ export function genRoutes(
       target ? target.component : undefined,
       `${rootPath}/`,
     );
-    const params = safeParse(menu.params);
     const route: RouteInterface = {
       path,
       menuId: menu.menuId,
@@ -95,7 +93,6 @@ export function genRoutes(
         exact: target?.exact ?? !isComponent,
         // icon: menu.menuIcon,
         routes: subRoutes.length ? subRoutes : undefined,
-        params,
       } as RouteInterface);
     } else {
       const subRoutes: RouteInterface[] = [];
@@ -116,7 +113,6 @@ export function genRoutes(
             component,
             // icon: menu.menuIcon,
             routes: subRoutes.length ? subRoutes : undefined,
-            params,
           } as RouteInterface);
         } else {
           Object.assign(route, {
@@ -132,7 +128,6 @@ export function genRoutes(
             exact: true,
             // icon: menu.menuIcon,
             routes: subRoutes.length ? subRoutes : undefined,
-            params,
           } as RouteInterface);
         }
       }

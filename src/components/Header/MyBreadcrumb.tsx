@@ -5,7 +5,6 @@ import classnames from 'classnames';
 import { HomeOutlined } from '@ant-design/icons';
 import { useHistory, useLocation } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
-import { stringify } from 'qs';
 import { RouteInterface } from '#/routes';
 import styles from './Breadcrumb.module.scss';
 
@@ -68,7 +67,6 @@ export function filterFather(route?: TargetRoute): TargetRoute | undefined {
 export interface BreadcrumbMap {
   name?: string;
   path?: string;
-  params?: Record<string, any>;
   notLink?: boolean;
 }
 
@@ -80,7 +78,6 @@ export function getBreadCrumbMaps(
     memoList.unshift({
       name: targetRoute.title,
       path: targetRoute.path,
-      params: targetRoute.params,
       notLink: targetRoute.notLink,
     });
     if (targetRoute.father) {
@@ -118,9 +115,6 @@ const MyBreadcrumb: React.FC<BreadcrumbProps> = (props) => {
             onClick={() =>
               history.push({
                 pathname: breadCrumbMap.path,
-                search: breadCrumbMap.params
-                  ? stringify(breadCrumbMap.params)
-                  : undefined,
               })
             }
           >
@@ -133,9 +127,6 @@ const MyBreadcrumb: React.FC<BreadcrumbProps> = (props) => {
             onClick={() =>
               history.push({
                 pathname: breadCrumbMap.path,
-                search: breadCrumbMap.params
-                  ? stringify(breadCrumbMap.params)
-                  : undefined,
               })
             }
           >

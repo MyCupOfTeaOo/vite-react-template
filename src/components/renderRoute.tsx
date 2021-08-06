@@ -16,7 +16,7 @@ const renderRoute = (route: RouteInterface) => {
   }
   const renderCom = (
     <Boundary>
-      <Com>
+      <Com {...route.params}>
         <Title />
         {route.routes ? (
           <Switch>
