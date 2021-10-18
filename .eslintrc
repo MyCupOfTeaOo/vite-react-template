@@ -55,6 +55,26 @@
       "error",
       { "allow": ["_id"], "allowAfterThis": true }
     ],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsForRegex": [
+          // standard array.reduce
+          "acc",
+          // array.reduce with params named differently from `acc`. They must end with `Acc` at least
+          "Acc$",
+          // standard Immer draft
+          "draft",
+          // Immer drafts
+          "Draft$",
+          // refs passed around hooks
+          "Ref$",
+          // parameters prefixed by `mutable`
+          "^mutable"
+        ]
+      }
+    ],
     // Too restrictive, writing ugly code to defend against a very unlikely scenario: https://eslint.org/docs/rules/no-prototype-builtins
     "no-prototype-builtins": "off",
     "import/prefer-default-export": "off",
